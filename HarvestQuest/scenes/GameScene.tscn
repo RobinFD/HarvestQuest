@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Entities/BoxWithFriction/BoxWithFriction.gd" type="Script" id=1]
+[ext_resource path="res://scenes/GameBaseNode.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/FollowCam.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Entities/Dude/ProtagDude.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Entities/Harvestable/Harvestable.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25.1413, 25.101 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2499.68, 4.83786 )
+
+[node name="MainGameNode" type="Navigation2D"]
+script = ExtResource( 2 )
+
+[node name="ProtagDude" parent="." instance=ExtResource( 4 )]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2( 260.859, 98.7689 )
+gravity_scale = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+air_friction = 500.0
+
+[node name="ColorRect" type="ColorRect" parent="RigidBody2D"]
+margin_left = -25.0
+margin_top = -25.0
+margin_right = 25.0
+margin_bottom = 25.0
+rect_pivot_offset = Vector2( 25, 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 1 )
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2( 179.822, 167.737 )
+gravity_scale = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+air_friction = 500.0
+
+[node name="ColorRect" type="ColorRect" parent="RigidBody2D2"]
+margin_left = -25.0
+margin_top = -25.0
+margin_right = 25.0
+margin_bottom = 25.0
+rect_pivot_offset = Vector2( 25, 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 0, 400 )
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+margin_left = -2500.0
+margin_right = 2500.0
+margin_bottom = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 4.48596 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 3 )
+target = NodePath("../ProtagDude")
+factor = 4.0
+
+[node name="Harvestable" parent="." instance=ExtResource( 5 )]
+position = Vector2( 304.705, -32.8134 )
+
+[node name="Harvestable2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -236.109, -35.0277 )
